@@ -12,13 +12,22 @@
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([call.method isEqualToString:@"getDownloadsDirectory"]) {
     result([self getDownloadsDirectory]);
-  } else {
+  }
+  else if( [call.method isEqualToString:@"getPictureDirectory"]){
+      result([self getPictureDirectory]);
+  }
+  else {
     result(FlutterMethodNotImplemented);
   }
 }
 
 - (NSString*)getDownloadsDirectory {
   NSArray* paths = NSSearchPathForDirectoriesInDomains(NSDownloadsDirectory, NSUserDomainMask, YES);
+  return paths.firstObject;
+}
+
+- (NSString*)getPictureDirectory {
+  NSArray* paths = NSSearchPathForDirectoriesInDomains(NSPicturesDirectory, NSUserDomainMask, YES);
   return paths.firstObject;
 }
 
